@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "title": "Tênis",
+      "description": "Tênis esportivo",
+      "price": 200,
+      "thumbnail": "caminho/para/imagem.jpg",
+      "code": "T001",
+      "stock": 20
+    },
+    {
+      "id": 2,
+      "title": "Camisa",
+      "description": "Camisa de algodão",
+      "price": 50,
+      "thumbnail": "caminho/para/imagem.jpg",
+      "code": "C001",
+      "stock": 100
+    }
+  ]
+  

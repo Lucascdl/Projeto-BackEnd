@@ -1,44 +1,75 @@
 class ProductManager {
-    constructor() {
+  constructor() {
       this.products = [];
-      this.lastId = 0;
-    }
-  
-    addProduct({ title, description, price, thumbnail, code, stock }) {
-      if (!title || !description || !price || !thumbnail || !code || !stock) {
-        console.error("Todos os campos são obrigatórios");
-        return;
+      this.currentId = 1;
+  }
+
+  addProduct({ title, description, price, thumbnail, code, stock }) {
+      
+      if (!title || !description || !price || !thumbnail || !code || stock == null) {
+          console.error("Todos os campos são obrigatórios!");
+          return;
       }
-  
-      const exists = this.products.some(product => product.code === code);
-      if (exists) {
-        console.error("Código de produto já existe");
-        return;
+
+      if (this.products.some(product => product.code === code)) {
+          console.error(`Código duplicado: ${code}`);
+          return;
       }
-  
+
       const newProduct = {
-        id: ++this.lastId,
-        title,
-        description,
-        price,
-        thumbnail,
-        code,
-        stock
+          id: this.currentId++,
+          title,
+          description,
+          price,
+          thumbnail,
+          code,
+          stock
       };
-  
+
       this.products.push(newProduct);
-      return newProduct;
-    }
-  
-    getProductById(id) {
+      console.log("Produto adicionado com sucesso:", newProduct);
+  }
+
+  getProductById(id) {
       const product = this.products.find(p => p.id === id);
       if (!product) {
-        console.error("Produto não encontrado");
-        return null;
+          console.error("Produto não encontrado!");
+          return null;
       }
       return product;
-    }
   }
-  
-  export default ProductManager;
+}
+
+const productManager = new ProductManager();
+
+productManager.addProduct({
+  title: "Camisa",
+  description: "Camisa de algodão",
+  price: 50.0,
+  thumbnail: "caminho/para/imagem.jpg",
+  code: "C001",
+  stock: 100
+});
+
+productManager.addProduct({
+  title: "Calça",
+  description: "Calça jeans",
+  price: 120.0,
+  thumbnail: "caminho/para/imagem2.jpg",
+  code: "C002",
+  stock: 50
+});
+
+productManager.addProduct({
+  title: "Jaqueta",
+  description: "Jaqueta de couro",
+  price: 250.0,
+  thumbnail: "caminho/para/imagem3.jpg",
+  code: "C001",
+  stock: 30
+});
+
+console.log(productManager.getProductById(1));
+console.log(productManager.getProductById(99));
+
   
